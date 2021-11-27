@@ -133,7 +133,7 @@ sitemap:
 deploy:
 - type: 'git'
   repo: git@github.com:13592491893/13592491893.github.io.git
-  branch: main
+  branch: master
 #- type: baidu_url_submitter
 
 # baidu submit
