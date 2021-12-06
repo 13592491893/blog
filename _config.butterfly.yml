@@ -310,8 +310,8 @@ comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo
   use:
-  #- Valine
-   - Disqus
+  - Valine
+  #- Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
@@ -360,6 +360,7 @@ gitalk:
 # valine
 # https://valine.js.org
 valine:
+  enable: false
   appId: # 1d8poztffxfaYebwo4c29I3k-MdYXbMMI  # leancloud application app id            xxxxxxxxx
   appKey: # 3ODJjQ1DNVbzHrygrojnaJVQ   # leancloud application app key         xxxxxxxxx
   pageSize: 10 # comment list page size
