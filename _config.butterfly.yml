@@ -45,7 +45,7 @@ envelope_comment:
 # https://console.leancloud.cn/apps
 # 账号:shi13592491893 密码:Shilyy1314.
 artitalk:
-  enable: true
+  enable: false
   appId: 1d8poztffxfaYebwo4c29I3k-MdYXbMMI     # xxxxxxxxxxxxxxxxxxxxxxxxx
   appKey: 3ODJjQ1DNVbzHrygrojnaJVQ       # xxxxxxxxxxxxxxxxxxxxxxxx
   path:
@@ -822,15 +822,15 @@ note:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: true
+  enable: false
   exclude:
     # - xxxx
     # - xxxx
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
-  enable: true
-  per_page: true
+  enable: false
+  per_page: false
 
 # Snackbar (Toast Notification 彈窗)
 # https://github.com/polonel/SnackBar
@@ -986,9 +986,9 @@ CDN:
   justifiedGallery_css: https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css
 
   # aplayer
-  aplayer_css: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css
-  aplayer_js: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js
-  meting_js: https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js
+  #aplayer_css: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css
+  #aplayer_js: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js
+  #meting_js: https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js
 
   # Prism.js
   prismjs_js: https://cdn.jsdelivr.net/npm/prismjs/prism.min.js
