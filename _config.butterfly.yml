@@ -28,7 +28,7 @@ hide_sidebar_menu_child: false
 
 
 envelope_comment:
-  enable: true
+  enable: false
   cover: https://ae01.alicdn.com/kf/U5bb04af32be544c4b41206d9a42fcacfd.jpg # 信笺封面图
   message:  # 信笺内容，支持多行
     - 有什么想问的？
