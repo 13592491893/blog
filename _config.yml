@@ -11,8 +11,9 @@ author: Hy
 language: zh-CN
 timezone: ''
 
+##开启音乐
 aplayer:
-  meting: true
+  meting: false
   asset_inject: false
 
 # URL
@@ -124,7 +125,7 @@ plugin:
 
 baidusitemap:
   path: baidusitemap.xml
-  
+
 sitemap:
   path: sitemap.xml
 
@@ -137,7 +138,7 @@ deploy:
 
 # baidu submit
 baidu_url_submit:
-  count: 40                  # 提交最新的一个链接  xxxxxxxxxxx 
+  count: 40                  # 提交最新的一个链接  xxxxxxxxxxx
   host: ze520.cn         # 在百度站长平台中注册的域名
   token:    # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
   path: baidu_urls.txt       # 文本文档的地址， 新链接会保存在此文本文档里
@@ -153,12 +154,12 @@ permalink_pinyin:
   separator: '-' # default: '-'
 
 # emoji表情支持
-githubEmojis: 
+githubEmojis:
   enable: true
   className: github-emoji
   inject: true
-  styles: 
-  customEmojis: 
+  styles:
+  customEmojis:
 
 lazyload:
   enable: false  # 是否开启图片懒加载

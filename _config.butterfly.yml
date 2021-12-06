@@ -50,7 +50,7 @@ artitalk:
   appKey: 3ODJjQ1DNVbzHrygrojnaJVQ       # xxxxxxxxxxxxxxxxxxxxxxxx
   path:
   js:
-  option: 
+  option:
   front_matter:
     aside: false # 关闭侧边栏
     comments: false # 关闭评论
@@ -158,7 +158,7 @@ flink_style: flexcard # butterfly | volantis | flexcard
 
 cover:
   # display the cover or not (是否顯示文章封面)
-  index_enable: true
+  index_enable: false
   aside_enable: false
   archives_enable: false
   # the position of cover in home page (封面顯示的位置)
@@ -884,14 +884,14 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
-    #- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"> 
+    #- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css">
     - <link defer rel="stylesheet" href="/css/customm.css" > # xxxxxxxxxxxxxxx
     - <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/css/icon.css">
     - <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css">
     - <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/css/background.css">
     #- <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/css/index_ee.css">
-  
-    
+
+
   bottom:
     # - <script src="xxxx"></script>
     #- <script src="/js/calendar.js"></script>
@@ -899,7 +899,7 @@ inject:
     #- <script src='https://unpkg.com/butterfly-friend/dist/friend.min.js'></script>
     #- <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
     - <script defer id="dsq-count-scr" src="//xianqi.disqus.com/count.js" async></script>
-    - <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/sakura.js"></script> 
+    - <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/sakura.js"></script>
     - <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/animate.js"></script>
     #- '<div class="sliderbar_ee"><span style="color:rgb(186, 94, 87);"> ⇦ </span> <div class="con_ee"><img src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/img/qq.jpg" alt="" style=" width: 200px;"></div></div>'
     #- <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/index_ee.js"></script>
