@@ -360,7 +360,6 @@ gitalk:
 # valine
 # https://valine.js.org
 valine:
-  enable: false
   appId: # 1d8poztffxfaYebwo4c29I3k-MdYXbMMI  # leancloud application app id            xxxxxxxxx
   appKey: # 3ODJjQ1DNVbzHrygrojnaJVQ   # leancloud application app key         xxxxxxxxx
   pageSize: 10 # comment list page size
@@ -899,7 +898,7 @@ inject:
     #- <script src="/js/languages.js"></script>
     #- <script src='https://unpkg.com/butterfly-friend/dist/friend.min.js'></script>
     #- <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
-    - <script defer id="dsq-count-scr" src="//xianqi.disqus.com/count.js" async></script>
+    #- <script defer id="dsq-count-scr" src="//xianqi.disqus.com/count.js" async></script>
     - <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/sakura.js"></script>
     - <script defer type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/js/animate.js"></script>
     #- '<div class="sliderbar_ee"><span style="color:rgb(186, 94, 87);"> ⇦ </span> <div class="con_ee"><img src="https://cdn.jsdelivr.net/gh/zhaoze-jpg/Xianqi@main/img/qq.jpg" alt="" style=" width: 200px;"></div></div>'
