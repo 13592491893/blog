@@ -3,13 +3,14 @@ title: stream
 comments: true
 toc: true
 description: stream
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - java
   - stream
 tags:
   - stream
   - 命令
+abbrlink: f0e9be1c
 date: 2020-12-25 16:00:00
 ---
 # stream

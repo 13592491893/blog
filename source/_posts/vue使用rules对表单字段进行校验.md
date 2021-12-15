@@ -3,13 +3,14 @@ title: vue使用rules对表单字段进行校验
 comments: true
 toc: true
 description: vue使用rules对表单字段进行校验
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - vue
 tags:
   - 校验
   - vue
   - rules
+abbrlink: b0401a8b
 date: 2020-10-25 16:00:00
 ---
 # vue使用rules对表单字段进行校验

@@ -3,13 +3,14 @@ title: vue实际工作常用方法
 comments: true
 toc: true
 description: vue实际工作常用方法
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - vue
 tags:
   - 前端
   - vue
   - 工作
+abbrlink: 8a416b2c
 date: 2020-10-25 16:00:00
 ---
 # 1.select选择框获取key和value

@@ -3,13 +3,14 @@ title: Linux学习
 comments: true
 toc: true
 description: Linux学习
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - linux
 tags:
   - linux
   - 命令
   - 尚硅谷
+abbrlink: deb5175a
 date: 2021-12-06 17:00:00
 ---
 

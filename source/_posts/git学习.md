@@ -3,13 +3,14 @@ title: git学习
 comments: true
 toc: true
 description: git学习
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - git
 tags:
   - git
   - 命令
   - 尚硅谷
+abbrlink: e28ceec1
 date: 2021-11-25 16:00:00
 ---
 

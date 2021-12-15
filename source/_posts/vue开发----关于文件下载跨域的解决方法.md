@@ -3,13 +3,14 @@ title: vue开发-关于文件下载跨域的解决方法
 comments: true
 toc: true
 description: vue开发-关于文件下载跨域的解决方法
-top_img: https://gitee.com/gsshy/picgo/raw/master/img/top.jpg
+top_img: 'https://gitee.com/gsshy/picgo/raw/master/img/top.jpg'
 categories:
   - vue
 tags:
   - 前端
   - vue
   - 跨域
+abbrlink: a211f90a
 date: 2020-10-25 16:00:00
 ---
 # vue开发----关于文件下载跨域的解决方法
