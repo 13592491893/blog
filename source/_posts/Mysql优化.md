@@ -2566,5 +2566,265 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 ```
 
+# 19.MySql事务
+
+## 19.1.事务是什么？
+
+事务是一组SQL语句，要么全部执行成功，要么全部执行失败。通常一个事务对应一个完整的业务(例如银行账户转账业务，该业务就是一个最小的工作单元)
+事务的提交：COMMIT
+事务的回滚：ROLLBACK
+事务的关闭：CLOSE
+默认情况下一个SQL语句为一个事务。
+举例说明：
+![image-20211229104650143](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229104650143.png)
+
+这是两张表 user和user1
+现在我们需要让丽颖给刘昊然转十块钱。
+
+```java
+public static void main(String[] args) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/shiwu";
+            connection = DriverManager.getConnection(url,"root","132990");
+ 
+//            // 禁止jdbc自动提交事务
+//            connection.setAutoCommit(false);
+ 
+            preparedStatement = connection.prepareStatement("update user set money = money-? where id= ?");
+            preparedStatement.setInt(1,10);
+            preparedStatement.setInt(2,1);
+            preparedStatement.executeUpdate();
+ 
+ 
+            String str = null;
+            if(str.equals("")){
+ 
+            }
+ 
+            preparedStatement = connection.prepareStatement("update user1 set money = money+? where id = ?");
+            preparedStatement.setInt(1,10);
+            preparedStatement.setInt(2,1);
+            preparedStatement.executeUpdate();
+ 
+ 
+//            // 提交事务
+//            connection.commit();
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+//            // 回滚事务
+//            try {
+//                connection.rollback();
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
+ 
+        }finally {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+```
+
+我们可以观察出两个SQL语句中间会报空指针异常，这个时候我们来 看一下运行结果。
+
+![image-20211229104822768](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229104822768.png)
+
+所以这个时候我们应该禁止jdbc自动提交事务:
+
+```
+connection.setAutoCommit(false);
+```
+
+然后再两条SQl语句执行完之后提交事务
+
+```
+connection.commit();
+```
+
+如果有异常则回滚事务
+
+```java
+      catch (Exception e) {
+            e.printStackTrace();
+            // 回滚事务
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+ 
+        }
+```
+
+## 19.2.事务的ACID特性
+
+1. 原子性
+
+   事务是最小单元，不可再分，要么全部执行成功，要么全部失败回滚
+
+2. 一致性
+
+   一致性是指事务必须使数据库从一个一致的状态变到另外一个一致的状态，也就是执行事务之前和之后的状态都必须处于一致的状态。不一致性包含三点：**脏读，不可重复读，幻读**
+
+3. 隔离性
+
+   隔离性是指当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离
+
+4. 持久性
+
+   DBMS（数据库管理系统）对数据的修改是永久性的。
+
+## 19.3.事务的四个隔离级别
+
+**脏读**：一个事务处理过程里读取了另一个未提交的事务中的数据
+**可重复读**：一个事务在它运行期间，两次查找相同的表，出现了不同的数据
+**幻读**：在一个事务中读取到了别的事务插入的数据，导致前后不一致：
+A事务读取了B事务已经提交的新增数据。和不可重复读的区别，这里是新增，不可重复读是更改（或删除）。这两种情况对策是不一样的，对于不可重复读，只需要采取行级锁防止该记录数据被更改或删除，然而对于幻读必须加表级锁，防止在这个表中新增一条数据。
+
+- 读未提交：读未提交，即能够读取到没有被提交的数据，所以很明显这个级别的隔离机制无法解决脏读、不可重复读、幻读中的任何一种
+- 读已提交：读已提交，即能够读到那些已经提交的数据，自然能够防止脏读，但是无法限制不可重复读和幻读
+- 可重复读：可重复读，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，这样就解决了脏读、不可重复读的问题，
+- 串行化：串行化，多个事务时，只有运行完一个事务之后，才能运行其他事务。
+
+**我们来演示一下：**
+SELECT @@AUTOCOMMIT;   查看MySQL是否自动提交事务  0表示手动提交事务   1表示自动提交事务
+SET AUTOCOMMIT = 0;   设置事务提交方式  0表示手动提交事务   1表示自动提交事务
+
+![image-20211229105755336](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229105755336.png)
+
+SELECT  @@TX_ISOLATION;查询事务的隔离级别
+
+![image-20211229105817880](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229105817880.png)
+
+**未提交读的隔离级别**
+
+**默认为可重复读**。我们来将它改成**未提交读。**
+
+![image-20211229105902048](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229105902048.png)
+
+- 脏读
+
+  ![image-20211229105932329](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229105932329.png)
+
+  我们可以看到左边的事务还未提交，右边查到了左边没有的事务。
+  
+  **可提交读的隔离级别**
+  
+  ![image-20211229110050700](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229110050700.png)
+  
+  我们可以看到在可提交读隔离级别上**解决了脏读**
+  
+- **可重复读**
+
+  ![image-20211229110124302](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229110124302.png)
+
+  一个事务在它运行期间，两次查找相同的表，出现了不同的数据
+
+  **可重复读隔离级别**
+  
+  ![image-20211229110217504](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229110217504.png)
+  
+  可重复读：
+  
+  ![image-20211229110242339](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229110242339.png)
+  
+  我么可以看到这个隔离级别解决了可重复读
+  
+- 幻读
+
+  ![image-20211229110317877](https://gitee.com/gsshy/picgo/raw/master/img/image-20211229110317877.png)
+
+  我们可以看到这个并没有出现幻读。因为高版本MySQL Server做的一些优化，在高版本的MySQL用户手册里面，说在可重复读这个级别下，也会对幻读进行一定的防止，但是不能保证绝对不出现幻读。因为串行化一般是不会用到的，效率太低，MySQL默认工作在第三级别，可重复读情况下，所以对这个隔离级别做了优化。
+
+## 19.4.锁机制
+
+MySQL大致可归纳为以下3种锁：
+- 表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。
+- 行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。
+- 页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般
+表锁：对ＭyISAM表的读操作，不会阻塞其他用户对同一表的读请求，但会阻塞对同一表的写请求；对ＭyISAM表的写操作，则会阻塞其他用户对同一表的读和写请求；
+读读：可以允许
+读写：不允许
+写写：不允许
+InnoDB采用行锁
+InnoDB实现了以下两种类型的行锁。
+- 共享锁（s）：允许一个事务去读一行，阻止其他事务获得相同数据集的排他锁。
+- 排他锁（Ｘ）：允许获取排他锁的事务更新数据，阻止其他事务取得相同的数据集共享读锁和排他写锁。
+InnoDB行锁是通过索引上的索引项来实现的。InnoDB这种行锁实现特点意味者：只有通过索引条件检索数据，InnoDB才会使用行级锁，否则，InnoDB将使用表锁！
+对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及数据集加排他锁；对于普通SELECT语句，InnoDB不会加任何锁。
+间隙锁（Next-Key锁）
+当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据的索引项加锁；对于键值在条件范围内但并不存在的记录，叫做“间隙”，InnoDB也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁。
+比如会给between and 中间所有存在或者不存在数据加锁。可以防止幻读。
+MVCC（无锁实现） 多版本并发控制机制 --》给每一个事务维护一个数据最初的快照
+1，未提交读：
+读读/读写：事务不做任何隔离操作
+写写：获取记录的排他锁，不能同时进行，除非一个事务 提交或回滚
+2，已提交读：
+（其他事务提交或者回滚，它会立即读到）
+读读：事务读的是事务最初的快照 mvcc机制
+读写：读的是快照数据，写的也是快照数据 mvcc机制
+写写：获取记录的排他锁，不能同时进行，除非一个事务 提交或回滚
+3，可重复读 (jdbc默认隔离级别)
+读读：事务读的是快照数据 mvcc机制
+读写：读的是快照数据，写的也是快照数据（除非当前事务提交或回滚，否则访问的都是快照数据） mvcc机制
+写写：获取记录的排他锁，不能同时进行，除非一个事务 提交或回滚
+4，串行化
+读读 ：共享锁多个事务可以同时获取
+读写 : 共享锁和排它锁
+写写 ： 排它锁和排它锁
+
+## 19.5.mysql的for update
+
+### 19.5.1.使用场景
+
+如果遇到存在高并发并且对于数据的准确性很有要求的场景，是需要了解和使用for update的。
+
+比如涉及到金钱、库存等。一般这些操作都是很长一串并且是开启事务的。如果库存刚开始读的时候是1，而立马另一个进程进行了update将库存更新为0了，而事务还没有结束，会将错的数据一直执行下去，就会有问题。所以需要for upate 进行数据加锁防止高并发时候数据出错。
+**原则：一锁二判三更新**
+
+### 19.5.2.使用方法
+
+```sql
+select * from table where xxx for update
+```
+
+### 19.5.3.锁表
+
+InnoDB默认是行级别的锁，当有明确指定的主键时候，是行级锁。否则是表级别。
+
+例子: 假设表foods ，存在有id跟name、status三个字段，id是主键，status有索引。
+
+例1: (明确指定主键，并且有此记录，行级锁)
+SELECT * FROM foods WHERE id=1 FOR UPDATE;
+SELECT * FROM foods WHERE id=1 and name=‘咖啡色的羊驼’ FOR UPDATE;
+
+例2: (明确指定主键/索引，若查无此记录，无锁)
+SELECT * FROM foods WHERE id=-1 FOR UPDATE;
+
+例3: (无主键/索引，表级锁)
+SELECT * FROM foods WHERE name=‘咖啡色的羊驼’ FOR UPDATE;
+
+例4: (主键/索引不明确，表级锁)
+SELECT * FROM foods WHERE id<>‘3’ FOR UPDATE;
+SELECT * FROM foods WHERE id LIKE ‘3’ FOR UPDATE;
+
+for update的注意点
+1.for update 仅适用于InnoDB，并且必须开启事务，在begin与commit之间才生效。
+
+2.要测试for update的锁表情况，可以利用MySQL的Command Mode，开启二个视窗来做测试。
+
+当开启一个事务进行for update的时候，另一个事务也有for update的时候会一直等着，直到第一个事务结束吗？
+答：会的。除非第一个事务commit或者rollback或者断开连接，第二个事务会立马拿到锁进行后面操作。
+
+如果没查到记录会锁表吗？
+答：会的。表级锁时，不管是否查询到记录，都会锁定表。
 
 
